@@ -1,7 +1,18 @@
 import { groq } from "next-sanity";
 
 export const projectsQuery = groq`*[_type == "project"] | order(_createdAt desc)`;
-export const featuredProjectQuery = groq`*[_type == "project" && featured == true][0]`;
+export const featuredProjectQuery = groq`*[_type == "project" && featured == true][0]{
+  ...,
+  "reports": reports[]{
+    title,
+    "file": file.asset->{url, originalFilename}
+  },
+  "documentation": documentation[]{
+    title,
+    url,
+    "file": file.asset->{url, originalFilename}
+  }
+}`;
 export const homeProjectsQuery = groq`*[_type == "project" && featured != true] | order(_createdAt desc) [0...3]`;
 export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc)`;
 export const homePostsQuery = groq`*[_type == "post"] | order(publishedAt desc) [0...2]`;
