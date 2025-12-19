@@ -125,7 +125,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             {/* Documentation Links & Files */}
             {project.documentation && project.documentation.length > 0 && (
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6">Documentation</h2>
+                    <h2 className="text-2xl font-bold mb-6">Documentation (links)</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {project.documentation.map((doc: any, idx: number) => (
                             <a
