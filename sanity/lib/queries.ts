@@ -6,5 +6,16 @@ export const homeProjectsQuery = groq`*[_type == "project" && featured != true] 
 export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc)`;
 export const homePostsQuery = groq`*[_type == "post"] | order(publishedAt desc) [0...2]`;
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]`;
-export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $slug][0]`;
+export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $slug][0]{
+  ...,
+  "reports": reports[]{
+    title,
+    "file": file.asset->{url, originalFilename}
+  },
+  "documentation": documentation[]{
+    title,
+    url,
+    "file": file.asset->{url, originalFilename}
+  }
+}`;
 export const fypUpdatesQuery = groq`*[_type == "fypUpdate"] | order(date desc)`;

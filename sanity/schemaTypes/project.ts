@@ -113,7 +113,7 @@ export default defineType({
         }),
         defineField({
             name: 'documentation',
-            title: 'Documentation Links',
+            title: 'Documentation Links & Files',
             type: 'array',
             of: [
                 {
@@ -121,27 +121,33 @@ export default defineType({
                     fields: [
                         {
                             name: 'title',
-                            title: 'Link Title',
+                            title: 'Title',
                             type: 'string',
                             validation: (Rule) => Rule.required(),
                         },
                         {
                             name: 'url',
-                            title: 'URL',
+                            title: 'External URL (optional if uploading file)',
                             type: 'url',
-                            validation: (Rule) =>
-                                Rule.required().uri({ scheme: ['http', 'https'] }),
+                            validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+                        },
+                        {
+                            name: 'file',
+                            title: 'Upload File (optional if providing URL)',
+                            type: 'file',
+                            description: 'Upload a PDF or document file',
                         },
                     ],
                     preview: {
                         select: {
                             title: 'title',
                             url: 'url',
+                            file: 'file',
                         },
-                        prepare(selection: { title?: string; url?: string }) {
+                        prepare(selection: { title?: string; url?: string; file?: any }) {
                             return {
-                                title: selection.title || 'Untitled Link',
-                                subtitle: selection.url,
+                                title: selection.title || 'Untitled',
+                                subtitle: selection.url || selection.file?.asset?.originalFilename || 'No link/file',
                             }
                         },
                     },
