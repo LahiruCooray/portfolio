@@ -89,7 +89,7 @@ export default defineType({
                             validation: (Rule) =>
                                 Rule.required()
                                     .uri({ scheme: ['http', 'https'] })
-                                    .custom((url) => {
+                                    .custom((url: string | undefined) => {
                                         if (!url) return true
                                         const pattern = /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+$/
                                         return pattern.test(url) ? true : 'Must be a valid YouTube URL'

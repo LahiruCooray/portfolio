@@ -3,6 +3,7 @@ import { projectBySlugQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import ProjectContent from "@/components/ProjectContent";
+import ImageLightbox from "@/components/ImageLightbox";
 import { ArrowLeft, Github, Globe, ExternalLink, FileText, Calendar } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -87,18 +88,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             {project.gallery && project.gallery.length > 0 && (
                 <section className="mb-12">
                     <h2 className="text-2xl font-bold mb-6">Gallery</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {project.gallery.map((image: any, idx: number) => (
-                            <div key={idx} className="relative aspect-video rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-900">
-                                <Image
-                                    src={urlFor(image).url()}
-                                    alt={`Gallery image ${idx + 1}`}
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                        ))}
-                    </div>
+                    <ImageLightbox
+                        images={project.gallery.map((img: any) => urlFor(img).url())}
+                        alts={project.gallery.map((_: any, idx: number) => `Gallery image ${idx + 1}`)}
+                    />
                 </section>
             )}
 
