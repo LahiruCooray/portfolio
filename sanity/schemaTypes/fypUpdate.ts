@@ -30,17 +30,46 @@ export default defineType({
             options: { hotspot: true },
         }),
         defineField({
-            name: 'videoUrl',
-            title: 'Video URL (YouTube)',
-            type: 'url',
-            validation: (Rule) =>
-                Rule.uri({
-                    scheme: ['http', 'https'],
-                }).custom((url) => {
-                    if (!url) return true
-                    const pattern = /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+$/
-                    return pattern.test(url) ? true : 'Must be a valid YouTube URL'
-                }),
+            name: 'videos',
+            title: 'Videos',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        {
+                            name: 'title',
+                            title: 'Video Title',
+                            type: 'string',
+                        },
+                        {
+                            name: 'url',
+                            title: 'YouTube URL',
+                            type: 'url',
+                            validation: (Rule) =>
+                                Rule.uri({
+                                    scheme: ['http', 'https'],
+                                }).custom((url: string | undefined) => {
+                                    if (!url) return true
+                                    const pattern = /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+$/
+                                    return pattern.test(url) ? true : 'Must be a valid YouTube URL'
+                                }),
+                        },
+                    ],
+                    preview: {
+                        select: {
+                            title: 'title',
+                            url: 'url',
+                        },
+                        prepare(selection: { title?: string; url?: string }) {
+                            return {
+                                title: selection.title || 'Untitled Video',
+                                subtitle: selection.url || 'No URL',
+                            }
+                        },
+                    },
+                },
+            ],
         }),
         defineField({
             name: 'gallery',

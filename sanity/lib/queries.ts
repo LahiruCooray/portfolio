@@ -58,6 +58,10 @@ export const fypUpdatesQuery = groq`*[_type == "fypUpdate"] | order(date desc){
       originalFilename
     }
   },
+  "videos": videos[]{
+    title,
+    url
+  },
   "reports": reports[]{
     title,
     "file": file.asset->{url, originalFilename}

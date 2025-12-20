@@ -58,17 +58,29 @@ export default function UpdateCard({ update }: UpdateCardProps) {
                                 </div>
                             )}
 
-                            {update.videoUrl && (
-                                <div className="not-prose rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800 aspect-video">
-                                    <iframe
-                                        width="100%"
-                                        height="100%"
-                                        src={update.videoUrl.replace("watch?v=", "embed/").replace("youtu.be/", "youtube.com/embed/")}
-                                        title="Update Video"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        className="w-full h-full"
-                                    />
+                            {update.videos && update.videos.length > 0 && (
+                                <div className="not-prose">
+                                    <h3 className="text-lg font-semibold mb-4">Videos</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {update.videos.map((video: any, idx: number) => (
+                                            <div key={idx} className="rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                                                {video.title && (
+                                                    <h4 className="text-md font-medium px-3 pt-3 pb-2">{video.title}</h4>
+                                                )}
+                                                <div className="bg-black aspect-video">
+                                                    <iframe
+                                                        width="100%"
+                                                        height="100%"
+                                                        src={video.url.replace("watch?v=", "embed/").replace("youtu.be/", "youtube.com/embed/")}
+                                                        title={video.title || "Update Video"}
+                                                        className="w-full h-full"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                        allowFullScreen
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
 
