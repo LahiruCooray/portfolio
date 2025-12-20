@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
             <div className="space-y-4">
                 <h1 className="text-4xl font-bold">Projects</h1>
                 <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl">
-                    A collection of my work in robotics, embedded systems, simulation, and software engineering.
+
                 </p>
             </div>
 
