@@ -69,8 +69,45 @@ const components: PortableTextComponents = {
         image: ({ value }) => {
             if (!value?.asset) return null
 
+            // Support size field if present (for backwards compatibility)
+            const sizeClasses: Record<string, string> = {
+                small: 'max-w-[25%]',
+                medium: 'max-w-[50%]',
+                large: 'max-w-[75%]',
+                full: 'w-full',
+            }
+            const sizeClass = value.size ? sizeClasses[value.size] : 'w-full'
+
             return (
-                <div className="my-8 rounded-lg overflow-hidden">
+                <div className={`my-8 rounded-lg overflow-hidden ${sizeClass}`}>
+                    <Image
+                        src={urlFor(value).url()}
+                        alt={value.alt || 'Content image'}
+                        width={1200}
+                        height={800}
+                        className="w-full h-auto"
+                    />
+                    {value.caption && (
+                        <p className="text-sm text-center text-zinc-500 dark:text-zinc-400 mt-2 italic">
+                            {value.caption}
+                        </p>
+                    )}
+                </div>
+            )
+        },
+        contentImage: ({ value }) => {
+            if (!value?.asset) return null
+
+            const sizeClasses: Record<string, string> = {
+                small: 'max-w-[25%]',
+                medium: 'max-w-[50%]',
+                large: 'max-w-[75%]',
+                full: 'w-full',
+            }
+            const sizeClass = sizeClasses[value.size] || 'w-full'
+
+            return (
+                <div className={`my-8 rounded-lg overflow-hidden ${sizeClass}`}>
                     <Image
                         src={urlFor(value).url()}
                         alt={value.alt || 'Content image'}

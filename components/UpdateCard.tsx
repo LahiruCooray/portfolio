@@ -39,11 +39,11 @@ export default function UpdateCard({ update }: UpdateCardProps) {
 
                 {/* Collapsed/Expanded Content */}
                 <div className={`bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-xl space-y-6 overflow-hidden transition-all duration-300 ${!isExpanded ? 'max-h-[400px] relative' : ''}`}>
-                    {!isExpanded && (
-                        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-50 dark:from-zinc-900/50 to-transparent pointer-events-none" />
-                    )}
-
                     {update.content && <ProjectContent content={update.content} />}
+
+                    {!isExpanded && (
+                        <div className="absolute z-10 inset-x-0 bottom-0 h-48 bg-gradient-to-t from-zinc-50 dark:from-zinc-900 via-zinc-50/50 dark:via-zinc-900/50 to-transparent pointer-events-none" />
+                    )}
 
                     {isExpanded && (
                         <>
