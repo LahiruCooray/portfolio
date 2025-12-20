@@ -19,10 +19,10 @@ const components: PortableTextComponents = {
             <h4 className="text-xl font-semibold mt-6 mb-3 first:mt-0">{children}</h4>
         ),
         normal: ({ children }) => (
-            <p className="text-base leading-7 mb-6">{children}</p>
+            <p className="text-lg leading-relaxed mb-6">{children}</p>
         ),
         blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-blue-500 pl-4 italic my-6 text-zinc-600 dark:text-zinc-400">
+            <blockquote className="border-l-4 border-blue-500 pl-4 italic my-6 text-zinc-600 dark:text-zinc-400 text-lg">
                 {children}
             </blockquote>
         ),
@@ -37,10 +37,10 @@ const components: PortableTextComponents = {
     },
     listItem: {
         bullet: ({ children }) => (
-            <li className="leading-7">{children}</li>
+            <li className="text-lg leading-relaxed">{children}</li>
         ),
         number: ({ children }) => (
-            <li className="leading-7">{children}</li>
+            <li className="text-lg leading-relaxed">{children}</li>
         ),
     },
     marks: {

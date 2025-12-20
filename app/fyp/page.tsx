@@ -23,7 +23,7 @@ export default async function FYPPage() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-6 py-12 pb-20">
+        <div className="max-w-7xl mx-auto px-6 py-12 pb-20">
             <header className="mb-16 text-center space-y-6">
                 <div className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
                     Final Year Project
@@ -101,7 +101,8 @@ export default async function FYPPage() {
                     <h2 className="text-2xl font-bold mb-6">Gallery</h2>
                     <ImageLightbox
                         images={project.gallery.map((img: any) => urlFor(img).url())}
-                        alts={project.gallery.map((_: any, idx: number) => `Gallery image ${idx + 1}`)}
+                        alts={project.gallery.map((img: any, idx: number) => img.alt || `Gallery image ${idx + 1}`)}
+                        captions={project.gallery.map((img: any) => img.asset?.originalFilename || img.caption || '')}
                     />
                 </section>
             )}
@@ -110,7 +111,7 @@ export default async function FYPPage() {
             {project.videos && project.videos.length > 0 && (
                 <section className="mb-12">
                     <h2 className="text-2xl font-bold mb-6">Videos</h2>
-                    <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {project.videos.map((video: any, idx: number) => (
                             <div key={idx} className="rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800">
                                 {video.title && (

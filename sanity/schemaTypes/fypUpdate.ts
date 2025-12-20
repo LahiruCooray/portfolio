@@ -101,9 +101,11 @@ export default defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: 'nextMonthPlan',
-            title: 'Plan for Next Month',
+            name: 'teamProgress',
+            title: 'Overall Team Progress Update',
             type: 'text',
+            rows: 4,
+            description: 'Summary of the entire team\'s progress for this month',
             validation: (Rule) => Rule.max(500),
         }),
     ],

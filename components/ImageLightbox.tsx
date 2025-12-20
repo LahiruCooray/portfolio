@@ -7,9 +7,10 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 interface ImageLightboxProps {
     images: string[]
     alts: string[]
+    captions?: string[]
 }
 
-export default function ImageLightbox({ images, alts }: ImageLightboxProps) {
+export default function ImageLightbox({ images, alts, captions }: ImageLightboxProps) {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
     const openLightbox = (index: number) => {
@@ -35,7 +36,7 @@ export default function ImageLightbox({ images, alts }: ImageLightboxProps) {
     return (
         <>
             {/* Gallery Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {images.map((image, idx) => (
                     <div
                         key={idx}
@@ -62,7 +63,7 @@ export default function ImageLightbox({ images, alts }: ImageLightboxProps) {
                     {/* Close Button */}
                     <button
                         onClick={closeLightbox}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+                        className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white z-10"
                         aria-label="Close"
                     >
                         <X size={24} />
@@ -76,7 +77,7 @@ export default function ImageLightbox({ images, alts }: ImageLightboxProps) {
                                     e.stopPropagation()
                                     goToPrevious()
                                 }}
-                                className="absolute left-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white z-10"
                                 aria-label="Previous"
                             >
                                 <ChevronLeft size={32} />
@@ -86,7 +87,7 @@ export default function ImageLightbox({ images, alts }: ImageLightboxProps) {
                                     e.stopPropagation()
                                     goToNext()
                                 }}
-                                className="absolute right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white z-10"
                                 aria-label="Next"
                             >
                                 <ChevronRight size={32} />
@@ -96,21 +97,30 @@ export default function ImageLightbox({ images, alts }: ImageLightboxProps) {
 
                     {/* Image Container */}
                     <div
-                        className="relative w-full h-full max-w-7xl max-h-[90vh]"
+                        className="relative w-full h-full max-w-7xl max-h-[85vh] flex flex-col items-center justify-center"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <Image
-                            src={images[selectedIndex]}
-                            alt={alts[selectedIndex]}
-                            fill
-                            className="object-contain"
-                            quality={100}
-                            sizes="100vw"
-                        />
+                        <div className="relative w-full flex-1 flex items-center justify-center">
+                            <Image
+                                src={images[selectedIndex]}
+                                alt={alts[selectedIndex]}
+                                fill
+                                className="object-contain"
+                                quality={100}
+                                sizes="100vw"
+                            />
+                        </div>
+
+                        {/* Caption */}
+                        {captions && captions[selectedIndex] && (
+                            <div className="mt-4 px-6 py-3 bg-black/60 backdrop-blur-sm rounded-lg text-white text-center max-w-3xl">
+                                <p className="text-sm">{captions[selectedIndex]}</p>
+                            </div>
+                        )}
                     </div>
 
                     {/* Image Counter */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-white/10 rounded-full text-white text-sm">
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm">
                         {selectedIndex + 1} / {images.length}
                     </div>
                 </div>

@@ -20,7 +20,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     }
 
     return (
-        <article className="max-w-5xl mx-auto px-6 py-12 pb-20">
+        <article className="max-w-7xl mx-auto px-6 py-12 pb-20">
             <Link href="/projects" className="inline-flex items-center text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 mb-8 transition-colors">
                 <ArrowLeft size={16} className="mr-2" /> Back to projects
             </Link>
@@ -90,7 +90,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     <h2 className="text-2xl font-bold mb-6">Gallery</h2>
                     <ImageLightbox
                         images={project.gallery.map((img: any) => urlFor(img).url())}
-                        alts={project.gallery.map((_: any, idx: number) => `Gallery image ${idx + 1}`)}
+                        alts={project.gallery.map((img: any, idx: number) => img.alt || `Gallery image ${idx + 1}`)}
+                        captions={project.gallery.map((img: any) => img.asset?.originalFilename || img.caption || '')}
                     />
                 </section>
             )}
@@ -99,7 +100,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             {project.videos && project.videos.length > 0 && (
                 <section className="mb-12">
                     <h2 className="text-2xl font-bold mb-6">Videos</h2>
-                    <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {project.videos.map((video: any, idx: number) => (
                             <div key={idx} className="rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800">
                                 {video.title && (
