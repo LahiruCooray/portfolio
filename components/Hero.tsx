@@ -22,7 +22,7 @@ export default function Hero() {
                     </h2>
 
                     <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed border-l-2 border-zinc-200 dark:border-zinc-800 pl-6">
-                        Focusing on <span className="text-zinc-900 dark:text-zinc-100 font-medium">Robotics</span>, <span className="text-zinc-900 dark:text-zinc-100 font-medium">Autonomous Systems</span>, and <span className="text-zinc-900 dark:text-zinc-100 font-medium">Machine Learning</span>.
+                        Focusing on <span className="text-zinc-900 dark:text-zinc-100 font-medium">Robotics</span>, <span className="text-zinc-900 dark:text-zinc-100 font-medium">Autonomous Systems</span>, <span className="text-zinc-900 dark:text-zinc-100 font-medium">Machine Learning</span>, <span className="text-zinc-900 dark:text-zinc-100 font-medium">Full Stack Web Development</span>, and <span className="text-zinc-900 dark:text-zinc-100 font-medium">DevOps</span>.
                         Building precise, scalable, and intelligent solutions for complex engineering challenges.
                     </p>
 
