@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
     return (
-        <section className="py-20 lg:py-32">
+        <section className="pt-20 lg:pt-32 pb-12">{/* Reduced bottom padding for consistent spacing */}
             <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
                 {/* Text Content - spans 7 columns */}
                 <div className="lg:col-span-7 flex flex-col items-start space-y-8">

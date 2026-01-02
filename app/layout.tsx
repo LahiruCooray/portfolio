@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ChatBot from "@/components/ChatBot";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <ChatBot />
         </ThemeProvider>
       </body>
     </html>
