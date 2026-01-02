@@ -80,7 +80,7 @@ export async function searchSimilarContent(
   });
 
   return results.map((result) => ({
-    id: result.id,
+    id: String(result.id), // Convert to string to ensure type consistency
     score: result.score,
     metadata: result.metadata,
   }));
