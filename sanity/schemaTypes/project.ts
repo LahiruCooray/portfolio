@@ -69,6 +69,14 @@ export default defineType({
             initialValue: false,
         }),
         defineField({
+            name: 'order',
+            title: 'Display Order',
+            type: 'number',
+            description: 'Lower numbers appear first. Projects with the same order number will be sorted by creation date.',
+            initialValue: 0,
+            validation: (Rule) => Rule.integer(),
+        }),
+        defineField({
             name: 'videos',
             title: 'Videos (YouTube)',
             type: 'array',

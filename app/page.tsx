@@ -1,9 +1,10 @@
 import { client } from "@/sanity/lib/client";
-import { featuredProjectQuery, homeProjectsQuery, homePostsQuery } from "@/sanity/lib/queries";
+import { featuredProjectQuery, homeProjectsQuery, homePostsQuery, latestFypUpdateQuery } from "@/sanity/lib/queries";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import ProjectCard from "@/components/ProjectCard";
 import BlogCard from "@/components/BlogCard";
+import LatestUpdateBanner from "@/components/LatestUpdateBanner";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -14,6 +15,7 @@ export default async function Home() {
   const featuredProject = await client.fetch(featuredProjectQuery);
   const projects = await client.fetch(homeProjectsQuery);
   const posts = await client.fetch(homePostsQuery);
+  const latestUpdate = await client.fetch(latestFypUpdateQuery);
 
   return (
     <div className="max-w-7xl mx-auto px-6 space-y-24 pb-20">
@@ -32,6 +34,13 @@ export default async function Home() {
             </Link>
           </div>
           <ProjectCard project={featuredProject} />
+
+          {/* Latest FYP Update Banner */}
+          {latestUpdate && (
+            <div className="mt-6">
+              <LatestUpdateBanner update={latestUpdate} />
+            </div>
+          )}
         </section>
       )}
 
