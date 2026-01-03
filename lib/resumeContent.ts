@@ -181,7 +181,7 @@ export const resumeChunks: ContentChunk[] = [
       
       Programming Languages:
       - Primary: Python, C/C++
-      - Working knowledge: Java, MATLAB, JavaScript, Ballerina
+      - Working knowledge: Java, MATLAB, Ballerina
       
       Robotics, Control & Simulation:
       - Gazebo Harmonic, PX4-SITL, basic ROS2

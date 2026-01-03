@@ -76,7 +76,13 @@ export const fypUpdatesQuery = groq`*[_type == "fypUpdate"] | order(date desc){
     "file": file.asset->{url, originalFilename}
   }
 }`;
-export const experienceQuery = groq`*[_type == "experience"] | order(order asc, startDate desc)`;
+export const experienceQuery = groq`*[_type == "experience"] | order(order asc, startDate desc){
+  ...,
+  "gallery": gallery[]{
+    asset->{url},
+    caption
+  }
+}`;
 export const educationQuery = groq`*[_type == "education"] | order(order asc, startDate desc)`;
 export const latestFypUpdateQuery = groq`*[_type == "fypUpdate"] | order(date desc) [0]{
   _id,
