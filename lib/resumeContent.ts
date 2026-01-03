@@ -153,7 +153,7 @@ export const resumeChunks: ContentChunk[] = [
         text: `
       Embedded Systems Projects:
       
-      1. Variable Frequency Drive for AC Motors - February 2024 – August 2024
+      1. Variable Frequency Drive for AC Motors (VFD) - February 2024 – August 2024
       Tools: C/C++, AVR (ATmega328), Power Electronics, SolidWorks
       - Developed a VFD for 3-phase AC motors (up to 2.2 kW) in a two-person team; adapted Arduino code to bare-metal AVR C/C++.
       - Designed the VFD enclosure in SolidWorks and contributed to component selection, assembly, and testing.
