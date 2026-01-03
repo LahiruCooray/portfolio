@@ -7,6 +7,53 @@ const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY!,
 });
 
+// Model configuration with automatic fallback
+const MODEL_CONFIG = {
+    // Main LLM models (in priority order)
+    main: {
+        primary: "llama-3.3-70b-versatile",
+        fallback: "meta-llama/llama-4-maverick-17b-128e-instruct",
+        currentIndex: 0,
+        lastFallbackTime: null as Date | null,
+        RECOVERY_INTERVAL: 60 * 60 * 1000, // Try primary again after 5 minutes
+    },
+    // Classifier models (in priority order)
+    classifier: {
+        primary: "llama-3.1-8b-instant",
+        fallback: "meta-llama/llama-4-scout-17b-16e-instruct",
+        currentIndex: 0,
+        lastFallbackTime: null as Date | null,
+        RECOVERY_INTERVAL: 60 * 60 * 1000,
+    },
+};
+
+// Get current model, attempting recovery on user query if 60 min has passed
+function getModel(type: 'main' | 'classifier'): string {
+    const config = MODEL_CONFIG[type];
+
+    // If using fallback, check if we should try primary again
+    // Recovery only happens when a user query triggers this function
+    if (config.currentIndex > 0 && config.lastFallbackTime) {
+        const timeSinceFallback = Date.now() - config.lastFallbackTime.getTime();
+        if (timeSinceFallback > config.RECOVERY_INTERVAL) {
+            console.log(`🔄 60 min passed - attempting recovery to primary ${type} model on this query...`);
+            config.currentIndex = 0;
+            config.lastFallbackTime = null;
+        }
+    }
+
+    return config.currentIndex === 0 ? config.primary : config.fallback;
+}
+
+// Switch to fallback on error
+function switchToFallback(type: 'main' | 'classifier'): string {
+    const config = MODEL_CONFIG[type];
+    config.currentIndex = 1;
+    config.lastFallbackTime = new Date();
+    console.log(`⚠️ Switched ${type} to fallback model: ${config.fallback}`);
+    return config.fallback;
+}
+
 // In-memory session storage (resets on server restart)
 interface ChatMessage {
     role: "user" | "assistant";
@@ -112,12 +159,30 @@ ${recentHistory ? `Recent conversation:\n${recentHistory}\n\n` : ''}Current ques
 
 Classification:`;
 
-        const classification = await groq.chat.completions.create({
-            model: "llama-3.1-8b-instant",
-            messages: [{ role: "user", content: classificationPrompt }],
-            temperature: 0.1,
-            max_tokens: 20,
-        });
+        // Try classifier with fallback on rate limit
+        let classification;
+        let classifierModel = getModel('classifier');
+        try {
+            classification = await groq.chat.completions.create({
+                model: classifierModel,
+                messages: [{ role: "user", content: classificationPrompt }],
+                temperature: 0.1,
+                max_tokens: 20,
+            });
+        } catch (error: any) {
+            if (error?.status === 429 || error?.message?.includes('rate')) {
+                // Rate limited - try fallback
+                classifierModel = switchToFallback('classifier');
+                classification = await groq.chat.completions.create({
+                    model: classifierModel,
+                    messages: [{ role: "user", content: classificationPrompt }],
+                    temperature: 0.1,
+                    max_tokens: 20,
+                });
+            } else {
+                throw error;
+            }
+        }
 
         const classificationResult = classification.choices[0].message.content?.trim().toUpperCase();
 
@@ -263,13 +328,31 @@ Remember: You are David, Lahiru's portfolio assistant. Accuracy is more importan
             { role: "user", content: message },
         ];
 
-        // Call Groq API
-        const completion = await groq.chat.completions.create({
-            model: "llama-3.3-70b-versatile", // Updated model (3.1 was decommissioned)
-            messages,
-            temperature: 0.7,
-            max_tokens: 500,
-        });
+        // Call Groq API with fallback on rate limit
+        let completion;
+        let mainModel = getModel('main');
+        try {
+            completion = await groq.chat.completions.create({
+                model: mainModel,
+                messages,
+                temperature: 0.7,
+                max_tokens: 500,
+            });
+        } catch (error: any) {
+            if (error?.status === 429 || error?.message?.includes('rate')) {
+                // Rate limited - try fallback
+                mainModel = switchToFallback('main');
+                console.log(`🔄 Retrying with fallback model: ${mainModel}`);
+                completion = await groq.chat.completions.create({
+                    model: mainModel,
+                    messages,
+                    temperature: 0.7,
+                    max_tokens: 500,
+                });
+            } else {
+                throw error;
+            }
+        }
 
         const assistantMessage = completion.choices[0].message.content || "I apologize, but I couldn't generate a response.";
         const timestamp = new Date().toISOString();
