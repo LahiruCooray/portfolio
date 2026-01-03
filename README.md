@@ -156,7 +156,7 @@ This creates vector embeddings for:
 
 The chatbot uses two models with automatic fallback:
 
-- **Classifier:** `llama-3.1-8b-instant` → `llama-3.3-70b-versatile`
+- **Classifier:** `llama-3.1-8b-instant` → `llama-4-scout-17b`
 - **Main LLM:** `llama-3.3-70b-versatile` → `llama-4-maverick-17b`
 
 Fallback triggers on 429 rate limits and auto-recovers after 60 minutes.
