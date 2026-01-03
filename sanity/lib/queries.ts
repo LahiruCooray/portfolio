@@ -1,6 +1,15 @@
 import { groq } from "next-sanity";
 
-export const projectsQuery = groq`*[_type == "project"] | order(order asc, _createdAt desc)`;
+export const projectsQuery = groq`*[_type == "project"] | order(order asc, _createdAt desc){
+  ...,
+  "gallery": gallery[0..4]{
+    asset->{url}
+  },
+  "videos": videos[0..2]{
+    title,
+    url
+  }
+}`;
 export const featuredProjectQuery = groq`*[_type == "project" && featured == true][0]{
   ...,
   "gallery": gallery[]{
