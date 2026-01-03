@@ -187,8 +187,8 @@ export const resumeChunks: ContentChunk[] = [
       - Gazebo Harmonic, PX4-SITL, basic ROS2
       - PID/feedback control
       - Robot kinematics (forward/inverse)
-      - State estimation (Kalman, Extended Kalman, particle filters)
-      - SLAM (Simultaneous Localization and Mapping)
+      - coursework exposure to State estimation (Kalman, Extended Kalman, particle filters)
+      - coursework exposure to SLAM (Simultaneous Localization and Mapping)
       
       Machine Learning & Data:
       - Python ML stack: NumPy, pandas, matplotlib, TensorFlow, PyTorch
@@ -238,6 +238,10 @@ export const resumeChunks: ContentChunk[] = [
       3. Innovate with Ballerina – Most Popular Team (codeBallerinas) - October 2024
       IEEE Student Branch & IEEE CS Student Branch Chapter, University of Moratuwa
       - Recognised as the "Most Popular Team" at the Innovate with Ballerina hackathon powered by WSO2.
+
+      4. IEEEXtreme 17.0 | Team - CodeLeague Oct 2023
+      Country Rank - 91 out of 330 teams, Global Rank - 1130 out of 4231 teams
+      - Participated in the IEEEXtreme 17.0 hackathon and achieved a global rank of 1130 out of 4231 teams.
     `.trim(),
         metadata: {
             type: "resume",
