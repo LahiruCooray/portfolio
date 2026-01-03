@@ -172,11 +172,4 @@ The project is configured for automatic deployments on push to main.
 
 ## License
 
-MIT License - feel free to use this as inspiration for your own portfolio!
-
-## Contact
-
-- **Website:** [lahirucooray.dev](https://lahirucooray.dev)
-- **LinkedIn:** [linkedin.com/in/lahiru-cooray](https://linkedin.com/in/lahiru-cooray)
-- **GitHub:** [github.com/LahiruCooray](https://github.com/LahiruCooray)
-- **Email:** plahirucooray@gmail.com
+MIT License 
