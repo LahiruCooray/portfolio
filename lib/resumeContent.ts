@@ -124,7 +124,7 @@ export const resumeChunks: ContentChunk[] = [
       Software Engineering & DevOps Projects:
       
       1. GridWatch – Power Plant Transformer Inspection Tool - August 2025 – December 2025
-      Team: VAULt (V=Viyathma, A=Anushka, U=Udula, L=Lahiru, T for completion)
+      Team: VAULt (V=Viyathma, A=Anushka, U=Udula, L=Lahiru, T for completion with a meaningful team name (not a team member))
       Tools: Java, Spring Boot, PostgreSQL, Maven, REST APIs, YOLOv8
       - GridWatch is a web platform for managing transformer inspections and thermal images, with YOLOv8-based anomaly detection.
       - Developed backend services in Spring Boot, including database schema design and REST API endpoints for managing transformers, inspections, and thermal images.

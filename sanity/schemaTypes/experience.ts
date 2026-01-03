@@ -49,6 +49,26 @@ export default defineType({
             description: 'Responsibilities and achievements',
         }),
         defineField({
+            name: 'gallery',
+            title: 'Gallery',
+            type: 'array',
+            of: [{
+                type: 'image',
+                options: { hotspot: true },
+                fields: [
+                    {
+                        name: 'caption',
+                        type: 'string',
+                        title: 'Caption',
+                    }
+                ]
+            }],
+            options: {
+                layout: 'grid',
+            },
+            description: 'Photos from your time at this company (office, team, projects, etc.)',
+        }),
+        defineField({
             name: 'order',
             title: 'Display Order',
             type: 'number',
