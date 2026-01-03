@@ -91,10 +91,17 @@ export async function fetchAndChunkContent(): Promise<ContentChunk[]> {
 
   // Chunk FYP updates
   fypUpdates.forEach((update: any) => {
+    // Extract month name from title or month field for better searchability
+    const monthName = update.month || update.title?.split(':')[0] || 'Unknown';
+
     const text = `
-      FYP Update: ${update.title}
-      Month: ${update.month}
+      FYP Update for ${monthName} - Final Year Project Monthly Update
+      Title: ${update.title}
+      Month: ${monthName}
       Date: ${update.date}
+      
+      This is Lahiru's ${monthName} FYP (Final Year Project) update about the Aerial Manipulator project.
+      
       Progress: ${update.teamProgress || "Not specified"}
       Details: ${update.content?.substring(0, 500) || "Not specified"}
     `.trim();
@@ -105,7 +112,7 @@ export async function fetchAndChunkContent(): Promise<ContentChunk[]> {
       metadata: {
         type: "fypUpdate",
         title: update.title,
-        month: update.month,
+        month: monthName,
         date: update.date,
         sourceId: update._id,
       },

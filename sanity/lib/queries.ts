@@ -20,7 +20,16 @@ export const featuredProjectQuery = groq`*[_type == "project" && featured == tru
     "file": file.asset->{url, originalFilename}
   }
 }`;
-export const homeProjectsQuery = groq`*[_type == "project" && featured != true] | order(order asc, _createdAt desc) [0...3]`;
+export const homeProjectsQuery = groq`*[_type == "project" && featured != true] | order(order asc, _createdAt desc) [0...3]{
+  ...,
+  "gallery": gallery[0..4]{
+    asset->{url}
+  },
+  "videos": videos[0..2]{
+    title,
+    url
+  }
+}`;
 export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc)`;
 export const homePostsQuery = groq`*[_type == "post"] | order(publishedAt desc) [0...2]`;
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]{

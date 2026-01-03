@@ -123,10 +123,13 @@ export const resumeChunks: ContentChunk[] = [
         text: `
       Software Engineering & DevOps Projects:
       
-      1. VAULt – Power Plant Transformer Inspection Tool - August 2025 – December 2025
-      Tools: Java, Spring Boot, PostgreSQL, Maven, REST APIs
+      1. GridWatch – Power Plant Transformer Inspection Tool - August 2025 – December 2025
+      Team: VAULt (V=Viyathma, A=Anushka, U=Udula, L=Lahiru, T for completion)
+      Tools: Java, Spring Boot, PostgreSQL, Maven, REST APIs, YOLOv8
+      - GridWatch is a web platform for managing transformer inspections and thermal images, with YOLOv8-based anomaly detection.
       - Developed backend services in Spring Boot, including database schema design and REST API endpoints for managing transformers, inspections, and thermal images.
-      - Implemented support for editing and storing anomaly bounding-box annotations used in the object detection pipeline.
+      - Implemented support for editing and storing anomaly bounding-box annotations used in the YOLOv8-based object detection pipeline.
+      - Built interactive bounding-box editing features for the anomaly detection interface.
       
       2. Inventory Management System (Flask + DevOps) - January 2025
       Tools: Python, Flask, PostgreSQL, Docker, Kubernetes, Helm, Minikube
@@ -196,7 +199,8 @@ export const resumeChunks: ContentChunk[] = [
       - Text-to-SQL pipelines
       
       Web & Backend Development:
-      - Flask, FastAPI, Spring Boot, React
+      - Primary: Flask, FastAPI
+      - Secondary: Spring Boot
       - HTML/CSS, RESTful APIs, WebSockets
       - PostgreSQL database
       

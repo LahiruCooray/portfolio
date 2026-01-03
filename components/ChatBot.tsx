@@ -8,6 +8,7 @@ import ChatMessage from "./ChatMessage";
 export default function ChatBot() {
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const { messages, isLoading, error, sendMessage } = useChat();
 
@@ -15,6 +16,38 @@ export default function ChatBot() {
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
+
+    // Popup greeting - shows on load and every 5 minutes
+    useEffect(() => {
+        if (isOpen) {
+            setShowPopup(false);
+            return;
+        }
+
+        // Show popup after 1 second on initial load
+        const initialTimeout = setTimeout(() => {
+            setShowPopup(true);
+        }, 1000);
+
+        // Hide popup after 5 seconds
+        const hideTimeout = setTimeout(() => {
+            setShowPopup(false);
+        }, 6000);
+
+        // Show popup every 5 minutes (300000ms)
+        const interval = setInterval(() => {
+            if (!isOpen) {
+                setShowPopup(true);
+                setTimeout(() => setShowPopup(false), 5000);
+            }
+        }, 300000);
+
+        return () => {
+            clearTimeout(initialTimeout);
+            clearTimeout(hideTimeout);
+            clearInterval(interval);
+        };
+    }, [isOpen]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,15 +59,26 @@ export default function ChatBot() {
 
     return (
         <>
-            {/* Chat Button */}
+            {/* Chat Button with Popup */}
             {!isOpen && (
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
-                    aria-label="Open chat"
-                >
-                    <MessageCircle size={24} />
-                </button>
+                <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+                    {/* Popup Tooltip */}
+                    {showPopup && (
+                        <div className="animate-fade-in bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-4 py-2.5 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-700 text-sm font-medium whitespace-nowrap">
+                            Hey! I'm David 👋
+                            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-white dark:bg-zinc-800 border-r border-t border-zinc-200 dark:border-zinc-700 rotate-45" />
+                        </div>
+                    )}
+
+                    {/* Chat Button */}
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                        aria-label="Open chat"
+                    >
+                        <MessageCircle size={24} />
+                    </button>
+                </div>
             )}
 
             {/* Chat Window */}

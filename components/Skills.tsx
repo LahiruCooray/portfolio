@@ -4,7 +4,7 @@ import {
     SiRos, SiArduino, SiPostgresql, SiGit, SiLinux,
     SiHelm
 } from "react-icons/si";
-import { Box, Brain, Layers } from "lucide-react";
+import { Box, Brain, Layers, Cuboid } from "lucide-react";
 
 const skills = [
     { name: "Python", icon: SiPython, color: "text-zinc-400 group-hover:text-yellow-500" },
@@ -21,6 +21,7 @@ const skills = [
     { name: "Kubernetes", icon: SiKubernetes, color: "text-zinc-400 group-hover:text-blue-600" },
     { name: "Helm", icon: SiHelm, color: "text-zinc-400 group-hover:text-blue-500" },
     { name: "Arduino", icon: SiArduino, color: "text-zinc-400 group-hover:text-teal-500" },
+    { name: "SolidWorks", icon: Cuboid, color: "text-zinc-400 group-hover:text-red-600" },
     { name: "PostgreSQL", icon: SiPostgresql, color: "text-zinc-400 group-hover:text-blue-700" },
     { name: "Git", icon: SiGit, color: "text-zinc-400 group-hover:text-orange-600" },
     { name: "Linux", icon: SiLinux, color: "text-zinc-400 group-hover:text-zinc-100" },
