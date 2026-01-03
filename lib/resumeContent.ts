@@ -286,13 +286,16 @@ export const resumeChunks: ContentChunk[] = [
       - Member, IEEE Signal Processing Society (SPS), 2025 – Present
       
       Certifications & Online Courses:
-      - Oracle Cloud Infrastructure 2024 Certified Foundations Associate
-      - Certified Kubernetes Administrator (CKA) with Practice Tests
-      - Helm Kubernetes Packaging Manager for Developers and DevOps
-      - Advanced Learning Algorithms
-      - ROS 2 for Beginners (ROS Jazzy – 2025)
-      - Reinforcement Learning Beginner to Master – AI in Python
-      - Linux – The Complete Linux Guide
+      - Oracle Cloud Infrastructure 2024 Certified Foundations Associate (Oracle)
+      - Certified Kubernetes Administrator (CKA) with Practice Tests (Udemy)
+      - Helm Kubernetes Packaging Manager for Developers and DevOps (Udemy)
+      - Supervised Machine Learning: Regression and Classification (Coursera)
+      - Advanced Learning Algorithms (Coursera)
+      - Generative AI: Introduction and Applications (Coursera)
+      - ROS 2 for Beginners (ROS Jazzy – 2025) (Udemy)
+      - SolidWorks Beginners Course - Learn from an expert! (Udemy)
+      - Reinforcement Learning Beginner to Master – AI in Python (Udemy)
+      - Linux – The Complete Linux Guide (Udemy)
       
       Languages:
       - English (professional proficiency)
